@@ -1,1 +1,100 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$tms-primary: mat.define-palette(mat.$orange-palette);
+$tms-accent: mat.define-palette(
+  mat.$blue-gray-palette,
+  700,
+  800,
+  900
+);
+
+$tms-warn: mat.define-palette(mat.$red-palette);
+
+$tms-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $tms-primary,
+      accent: $tms-accent,
+      warn: $tms-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($tms-theme);
+
+$primary: mat.get-color-from-palette($tms-primary, default);
+$primary-lighter: mat.get-color-from-palette(
+  $tms-primary,
+  lighter
+);
+$primary-darker: mat.get-color-from-palette($tms-primary, darker);
+
+$accent: mat.get-color-from-palette($tms-accent, A200);
+$accent-lighter: mat.get-color-from-palette($tms-accent, lighter);
+$accent-darker: mat.get-color-from-palette($tms-accent, darker);
+
+:root {
+  --primary-color: #{$primary};
+  --primary-lighter-color: #{$primary-lighter};
+  --primary-darker-color: #{$primary-darker};
+  --accent-color: #{$accent};
+  --accent-lighter-color: #{$accent-lighter};
+  --accent-darker-color: #{$accent-darker};
+
+  --white: #ecf0f1;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gradient-bg {
+  background: linear-gradient(
+    138deg,
+    var(--primary-darker-color) 0%,
+    var(--primary-color) 100%
+  );
+}
+
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-color);
+  background-color: var(--accent-lighter-color);
+  &:hover {
+    background-color: var(--accent-color);
+  }
+}
+
+.logout-button mat-icon {
+  color: inherit;
+}
+
+.button-container {
+  padding: 16px;
+  button {
+    margin-right: 8px;
+    
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
