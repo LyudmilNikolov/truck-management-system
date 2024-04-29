@@ -12,16 +12,20 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     component: EntryComponent,
-    // children: [
-    //   {
-    //     path: 'home',
-    //     loadComponent: () => import('./home/home.component').then(homeModule => homeModule.HomeComponent),
-    //   },
-    //   {
-    //     path: 'employees',
-    //     loadChildren: () => import('./employees/employees.routes').then(employeesModule => employeesModule.EMPLOYEES_ROUTES),
-    //   },
-    // ],
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./modules/dashboard/dashboard.component').then(dashboardModule => dashboardModule.DashboardComponent),
+      },
+      {
+        path: 'vehicles',
+        loadChildren: () => import('./modules/vehicles/vehicles.routes').then(vehiclesModule => vehiclesModule.VEHICLES_ROUTES),
+      },
+      {
+        path: 'employees',
+        loadChildren: () => import('./modules/employees/employees.routes').then(employeesModule => employeesModule.EMPLOYEES_ROUTES),
+      },
+    ],
   },
   {
     path: '',
@@ -30,7 +34,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    // redirectTo: 'home'
-    redirectTo: ''
+    redirectTo: 'dashboard'
   },
 ];

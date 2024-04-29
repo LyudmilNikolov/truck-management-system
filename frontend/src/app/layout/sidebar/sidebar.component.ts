@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
-// import { ROUTE_PATHS } from '../../../shared/constants/route-paths.constants';
+import { ROUTE_PATHS } from '../../shared/constants/route-paths.constants';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,5 +13,5 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
-  // public routePaths = ROUTE_PATHS;
+  public routePaths = ROUTE_PATHS;
 }

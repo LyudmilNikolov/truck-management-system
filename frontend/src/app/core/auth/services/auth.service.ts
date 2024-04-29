@@ -48,7 +48,8 @@ export class AuthService {
   private handleAuthentication(res: AuthResponse): void {
     localStorage.setItem('accessToken', res.accessToken);
     this.setUserToStorage(res.user);
-    // exportTokenInfo
+    // exportTokenInfo here we will load all the access for the user 
+    // TODO: Add Admin user and normal user 
   }
 
   private navigateToLogin(): void {

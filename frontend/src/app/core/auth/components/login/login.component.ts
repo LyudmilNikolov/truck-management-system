@@ -19,13 +19,11 @@ export class LoginComponent {
 
   public loginStatus: LoginStatus = LoginStatus.IDLE;
 
-  constructor() {}
-
   handleLogin(credentials: Credentials) {
     this.loginStatus = LoginStatus.AUTHENTICATING;
-    this.authService.login(credentials).subscribe(response => {
-      if (response) {
-        this.router.navigate([ROUTE_PATHS.HOME]);
+    this.authService.login(credentials).subscribe(success => {
+      if (success) {
+        this.router.navigate([ROUTE_PATHS.DASHBOARD]);
       } else {
         this.loginStatus = LoginStatus.ERROR;
       }

@@ -1,8 +1,8 @@
 export const ROUTE_PATHS = {
-  HOME: 'home',
+  DASHBOARD: 'dashboard',
   LOGIN: 'auth/login',
   VEHICLES: 'vehicles',
-  NEW_VEHICLES: 'vehicles/0',
-  DRIVERS: 'employees/',
-  NEW_DRIVER: 'employees/0'
+  ADD_VEHICLE: 'vehicles/add',
+  EMPLOYEES: 'employees/',
+  ADD_EMPLOYEE: 'employees/add'
 };
