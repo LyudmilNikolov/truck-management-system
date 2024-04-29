@@ -1,15 +1,16 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './core/auth/guards/auth.guard';
 import { EntryComponent } from './layout/entry/entry.component';
 
 export const routes: Routes = [
-  // {
-  //   path: 'auth',
-  //   loadChildren: () => import('./auth/auth.routes').then(authModule => authModule.AUTH_ROUTES),
-  // },
+  {
+    path: 'auth',
+    loadChildren: () => import('./core/auth/components/auth.routes').then(authModule => authModule.AUTH_ROUTES),
+  },
   {
     path: '',
-    // canActivate: [AuthGuard],
-    // canActivateChild: [AuthGuard],
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     component: EntryComponent,
     // children: [
     //   {
@@ -22,11 +23,11 @@ export const routes: Routes = [
     //   },
     // ],
   },
-  // {
-  //   path: '',
-  //   redirectTo: 'auth',
-  //   pathMatch: 'full',
-  // },
+  {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full',
+  },
   {
     path: '**',
     // redirectTo: 'home'

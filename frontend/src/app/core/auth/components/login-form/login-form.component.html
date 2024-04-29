@@ -1,0 +1,40 @@
+<form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+  <mat-form-field appearance="fill">
+    <mat-label>username</mat-label>
+    <input
+      matNativeControl
+      formControlName="username"
+      type="email"
+      placeholder="username"
+    />
+    <mat-icon matPrefix>mail</mat-icon>
+    @if (loginForm.get('email')?.errors?.['required']) {
+      <mat-error> Email is required.</mat-error>
+    } @if (loginForm.get('email')?.errors?.['email']) {
+      <mat-error>Please enter a valid email address.</mat-error>
+    }
+    
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>password</mat-label>
+    <input
+      matNativeControl
+      formControlName="password"
+      type="password"
+      placeholder="password"
+    />
+    <mat-icon matPrefix>lock</mat-icon>
+    @if (loginForm.get('password')?.errors?.['required']) {
+      <mat-error>Password is required.</mat-error>
+    }
+  </mat-form-field>
+  @if (loginStatus === LoginStatus.ERROR) {
+    <mat-error>Could not log you in with those details.</mat-error>
+  } @if(loginStatus === LoginStatus.AUTHENTICATING) {
+    <mat-spinner diameter="50"></mat-spinner>
+  }
+
+  <button mat-raised-button color="accent" type="submit" [disabled]="loginStatus === LoginStatus.AUTHENTICATING">
+    Login
+  </button>
+</form>
