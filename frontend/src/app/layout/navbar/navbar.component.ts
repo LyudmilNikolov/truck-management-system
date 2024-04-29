@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-// import { CookieService } from 'ngx-cookie-service';
-// import { ROUTE_PATHS } from '../../../shared/constants/route-paths.constants';
-// import { AuthService } from '../../../shared/data-access/auth.service';
+import { AuthService } from '../../core/auth/services/auth.service';
+import { TokenManageService } from '../../core/auth/services/token-manage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,17 +12,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  // private router = inject(Router);
-  // private authService = inject(AuthService);
-  // private cookieService = inject(CookieService);
+  private authService = inject(AuthService);
+  private tokenManageService = inject(TokenManageService);
 
-  public user = 'Lyudmil Nikolov'; //this.cookieService.get('name');
-  
-  constructor() {}
+  public user = this.tokenManageService.getUsername();
 
   logout(): void {
-
-    // this.authService.logout();
-    // this.router.navigate([ROUTE_PATHS.LOGIN]);
+    this.authService.logout();
   }
 }
