@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../core/auth/services/auth.service';
 import { sidebarData } from './sidebar-data';
 
 interface SideNavToggle {
@@ -60,6 +61,8 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  constructor(private authService: AuthService) {}
+
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
   }
@@ -72,5 +75,9 @@ export class SidebarComponent implements OnInit {
   closeSidebar(): void {
     this.collapsed = false;
     this.toggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

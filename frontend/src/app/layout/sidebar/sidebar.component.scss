@@ -1,11 +1,13 @@
 .sidebar {
+  display: flex;
+  flex-direction: column;
   background: #263238;
   transition: all .5s ease;
   position: fixed;
   z-index: 1;
   top: 0;
   width: 5rem;
-  height: 100vh;
+  height: 100%;
   box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
 
   .logo-container {
@@ -52,6 +54,13 @@
 
 .sidebar-collapsed {
   width: 16.5625rem;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 
 .sidebar-nav {
@@ -106,4 +115,20 @@
   .sidebar-link-text {
     color: #000;
   }
+}
+
+.logout-button-wrapper {
+  padding: 0.938rem;
+  margin: 0;
+  cursor: pointer;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  background: inherit;
+  color: #f3f3f3;
+  border-radius: 0.625rem;
+  width: 100%;
 }
