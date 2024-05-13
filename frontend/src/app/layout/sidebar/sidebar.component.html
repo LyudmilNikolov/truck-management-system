@@ -1,13 +1,21 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="side" opened>
-    <mat-nav-list>
-      <a mat-list-item [routerLink]="routePaths.DASHBOARD">Dashboard</a>
-      <a mat-list-item [routerLink]="routePaths.VEHICLES">Vehicles</a>
-      <a mat-list-item [routerLink]="routePaths.EMPLOYEES">Employees</a>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="sidebar" [ngClass]="collapsed ? 'sidebar-collapsed': ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">T</button>
+    <div class="logo-text" @fadeInOut *ngIf="collapsed">TMS</div>
+    <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidebar()">
+      <mat-icon class="fal fa-times close-icon">close</mat-icon>
+    </button>
+  </div>
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item" *ngFor="let data of navData">
+      <a class="sidebar-nav-link" [routerLink]="[data.routeLink]" 
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon class="sidebar-link-icon" [class]="data.icon">{{data.icon}}</mat-icon>
+        <span class="sidebar-link-text" @fadeInOut *ngIf="collapsed">
+          {{data.label}}
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>

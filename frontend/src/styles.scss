@@ -49,6 +49,7 @@ $accent-darker: mat.get-color-from-palette($tms-accent, darker);
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
