@@ -1,11 +1,9 @@
 <mat-toolbar>
   <span>Employees</span>
-  <div>
-    <a mat-button color="secondary" routerLink="/employees/add">
-      <mat-icon>person_add</mat-icon>
-      Add New Employee
-    </a>
-  </div>
+  <button mat-button color="secondary" (click)="openAddDialog()">
+    <mat-icon>person_add</mat-icon>
+    Add New Employee
+  </button>
 </mat-toolbar>
 
 <ng-container *ngIf="(dataSource | async) as data">

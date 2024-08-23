@@ -33,8 +33,7 @@ export class VehiclesPageComponent implements OnInit {
   displayedColumns = this.columns.map(c => c.columnDef);
   private destroyRef = inject(DestroyRef);
 
-  constructor(private vehiclesService: VehiclesService,
-    public dialog: MatDialog) {}
+  constructor(private vehiclesService: VehiclesService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.dataSource = this.vehiclesService.getAllVehicles();

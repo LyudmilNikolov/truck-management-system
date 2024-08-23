@@ -1,15 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Employee } from '../models/employee.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeesService {
+  private apiUrl = 'http://localhost:3000/employees';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getAllEmployees() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return this.http.get<any>('http://localhost:3000/employees')
+  getAllEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.apiUrl);
+  }
+
+  addEmployee(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(this.apiUrl, employee);
   }
 }

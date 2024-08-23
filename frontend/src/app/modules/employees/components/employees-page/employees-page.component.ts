@@ -1,25 +1,15 @@
 import { AsyncPipe, DatePipe, NgFor, NgIf, TitleCasePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Observable } from 'rxjs';
+import { Employee } from '../../models/employee.model';
 import { EmployeesService } from '../../services/employees.service';
-
-interface Employee {
-  firstName: string;
-  lastName: string;
-  phone: string;
-  role: string;
-  status: string;
-  driverId: { card: number; expiryDate: string };
-  driverLicense: { card: number; expiryDate: string };
-  driverPsycho: { card: number; expiryDate: string };
-  driverQualification: { card: number; expiryDate: string };
-  driverTachograph: { card: number; expiryDate: string };
-  _id: string;
-}
+import { AddEmployeeDialogComponent } from '../add-employee-dialog/add-employee-dialog.component';
 
 @Component({
   selector: 'app-employees-page',
@@ -43,10 +33,35 @@ export class EmployeesPageComponent implements OnInit {
   ];
 
   displayedColumns = this.columns.map(c => c.columnDef);
+  private destroyRef = inject(DestroyRef);
 
-  constructor(private employeesService: EmployeesService) {}
+  constructor(private employeesService: EmployeesService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.dataSource = this.employeesService.getAllEmployees();
+  }
+
+  openAddDialog(): void {
+    const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
+      width: '50%',
+    });
+
+    dialogRef.afterClosed().pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(result => {
+      this.addEmployee(result);
+    });
+  }
+
+  addEmployee(employee: Employee): void {
+    if (employee) {  
+      this.employeesService.addEmployee(employee).subscribe({
+        next: res => {
+          console.log('Employee added successfully:', res);
+          // Refresh the table maybe?
+        },
+        error: err => console.error('Error adding employees:', err)
+      });
+    }
   }
 }
