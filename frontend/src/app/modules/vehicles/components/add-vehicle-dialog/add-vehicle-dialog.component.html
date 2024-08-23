@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Add New Vehicle</h1>
+<div mat-dialog-content>
+  <form [formGroup]="vehicleForm">
+    <ng-container *ngFor="let field of formFields">
+      @if (!field.group) {
+        <mat-form-field appearance="outline">
+          <mat-label>{{ field.label }}</mat-label>
+          <input matInput [formControlName]="field.control" [type]="field.type || 'text'">
+        </mat-form-field>
+      } @else {
+        <mat-form-field appearance="outline" [formGroupName]="field.group">
+          <mat-label>{{ field.label }}</mat-label>
+          <input matInput [formControlName]="field.control" [type]="field.type || 'text'">
+        </mat-form-field>
+      }
+    </ng-container>
+  </form>
+</div>
+<div mat-dialog-actions class="dialog-buttons">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="vehicleForm.value" cdkFocusInitial>Add</button>
+</div>
