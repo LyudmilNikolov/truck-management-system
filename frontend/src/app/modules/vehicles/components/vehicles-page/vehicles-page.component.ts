@@ -15,6 +15,7 @@ import { AddVehicleDialogComponent } from '../add-vehicle-dialog/add-vehicle-dia
   selector: 'app-vehicles-page',
   standalone: true,
   imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatTableModule, TitleCasePipe, DatePipe, AsyncPipe, NgIf, NgFor],
+  providers: [DatePipe],
   templateUrl: './vehicles-page.component.html',
   styleUrl: './vehicles-page.component.scss'
 })
@@ -25,18 +26,38 @@ export class VehiclesPageComponent implements OnInit {
     { columnDef: 'category', header: 'Category', cell: (element: Vehicle) => element.category },
     { columnDef: 'ecoType', header: 'Eco Type', cell: (element: Vehicle) => element.ecoType },
     { columnDef: 'status', header: 'Status', cell: (element: Vehicle) => element.status },
-    { columnDef: 'vehicleInsurance', header: 'Vehicle Insurance Expiry', cell: (element: Vehicle) => element.insurance.expiryDate },
-    { columnDef: 'vehicleInspection', header: 'Vehicle Inspection Expiry', cell: (element: Vehicle) => element.vehicleInspection.expiryDate },
-    { columnDef: 'vehicleTachographInspection', header: 'Vehicle Tachograph Expiry', cell: (element: Vehicle) => element.tachographInspection.expiryDate }
+    { 
+      columnDef: 'vehicleInsurance',
+      header: 'Vehicle Insurance Expiry',
+      cell: (element: Vehicle) => this.formatDate(element.insurance.expiryDate)
+    },
+    { 
+      columnDef: 'vehicleInspection',
+      header: 'Vehicle Inspection Expiry',
+      cell: (element: Vehicle) => this.formatDate(element.vehicleInspection.expiryDate)
+    },
+    { 
+      columnDef: 'vehicleTachographInspection',
+      header: 'Vehicle Tachograph Expiry',
+      cell: (element: Vehicle) => this.formatDate(element.tachographInspection.expiryDate) 
+    }
   ];
 
   displayedColumns = this.columns.map(c => c.columnDef);
   private destroyRef = inject(DestroyRef);
 
-  constructor(private vehiclesService: VehiclesService, public dialog: MatDialog) {}
+  constructor(
+    private vehiclesService: VehiclesService, 
+    public dialog: MatDialog,
+    private datePipe: DatePipe
+  ) {}
 
   ngOnInit(): void {
     this.dataSource = this.vehiclesService.getAllVehicles();
+  }
+
+  formatDate(date: string): string {
+    return this.datePipe.transform(date, 'yyyy-MM-dd') || '';
   }
 
   openAddDialog(): void {
