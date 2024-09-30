@@ -12,15 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Convert draw.io diagrams to PNG
-        uses: hg8496/drawio-export@v2.0
+      
+      - name: Convert draw.io to PNG
+        uses: peter-evans/drawio-action@v3
         with:
-          files: '**/*.drawio'
-          format: png
-      - name: Commit changes
+          source: 'workflows/*.drawio'
+          output: 'workflows/'
+          format: 'png'
+          
+      - name: Commit and push the converted PNG
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Auto-export draw.io diagrams"
+          git add workflows/*.png
+          git commit -m "Auto-export draw.io diagrams to PNG"
           git push
