@@ -21,7 +21,7 @@ jobs:
         with:
           path: 'workflows'
           format: 'png'
-          output: 'workflows/'
+          output: '/'
           transparent: true
 
       - name: Commit and push the converted PNG
