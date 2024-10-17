@@ -1,0 +1,14 @@
+.table-wrapper {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 1200px;
+  max-width: 1200px;
+  margin-bottom: 1rem;
+  display: table;
+  border-collapse: collapse;
+  margin: 0px;
+}
