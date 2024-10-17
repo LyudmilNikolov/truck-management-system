@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Edit Data</h1>
+<div mat-dialog-content>
+  <form [formGroup]="editForm">
+    <ng-container *ngFor="let field of data.formFields">
+      
+      <mat-form-field appearance="outline" *ngIf="!field.group">
+        <mat-label>{{ field.label }}</mat-label>
+        <input matInput [formControlName]="field.columnDef" [type]="field.type || 'text'">
+      </mat-form-field>
+
+      
+      <div *ngIf="field.group" [formGroupName]="field.group">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ field.label }}</mat-label>
+          <input matInput [formControlName]="field.columnDef" [type]="field.type || 'text'">
+        </mat-form-field>
+      </div>
+    </ng-container>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="save()" cdkFocusInitial>Save</button>
+</div>
