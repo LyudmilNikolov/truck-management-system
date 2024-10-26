@@ -6,12 +6,9 @@ form {
 
 button {
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 mat-error {
-  margin: 5px 0;
-}
-
-mat-spinner {
-  margin: 1rem 0;
+  color: blue;
 }
