@@ -4,21 +4,28 @@ export const sidebarData = [
   {
     routeLink: ROUTE_PATHS.DASHBOARD,
     icon: 'home',
-    label: 'Dashboard'
+    label: 'Dashboard',
   },
   {
     routeLink: ROUTE_PATHS.VEHICLES,
     icon: 'local_shipping',
-    label: 'Vehicles'
+    label: 'Vehicles',
   },
   {
     routeLink: ROUTE_PATHS.EMPLOYEES,
     icon: 'people',
-    label: 'Employees'
+    label: 'Employees',
   },
   {
     routeLink: 'settings',
     icon: 'settings',
-    label: 'Settings'
+    label: 'Settings',
+  },
+
+  {
+    routeLink: '/logout', // Route to be used or "#" if no routing
+    icon: 'logout',
+    label: 'Sign Out',
+    isLogout: true, // add this flag to style/logout action specifically
   },
 ];

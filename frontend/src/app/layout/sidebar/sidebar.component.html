@@ -1,30 +1,46 @@
-<div class="sidebar" [ngClass]="collapsed ? 'sidebar-collapsed': ''">
+<div
+  class="sidenav"
+  [ngClass]="isSidebarCollapsed() ? 'sidenav-collapsed' : ''"
+>
   <div class="logo-container">
-    <button class="logo" (click)="toggleCollapse()">T</button>
-    <div class="logo-text" @fadeInOut *ngIf="collapsed">TMS</div>
-    <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidebar()">
-      <mat-icon class="fal fa-times close-icon">close</mat-icon>
+    <button class="logo" (click)="toggleCollapse()">
+      <i class="fal fa-bars"></i>
     </button>
-  </div>
-  <div class="sidebar-content">
-    <ul class="sidebar-nav">
-      <li class="sidebar-nav-item" *ngFor="let data of navData">
-        <a class="sidebar-nav-link" [routerLink]="[data.routeLink]" routerLinkActive="active"
-          [routerLinkActiveOptions]="{exact: true}">
-          <mat-icon class="sidebar-link-icon" [class]="data.icon">{{data.icon}}</mat-icon>
-          <span class="sidebar-link-text" @fadeInOut *ngIf="collapsed">
-            {{data.label}}
-          </span>
-        </a>
-      </li>
-    </ul>
-    <div class="logout-button-wrapper">
-      <button mat-button class="logout-button" (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        <span class="sidebar-link-text" @fadeInOut *ngIf="collapsed">
-          Sign Out
-        </span>
+    @if (!isSidebarCollapsed()) {
+      <div class="logo-text">TMS</div>
+      <button class="btn-close" (click)="closeSidenav()">
+        <i class="fal fa-times close-icon"></i>
       </button>
-    </div>
+    }
+  </div>
+  <div class="sidenav-nav">
+    @for (item of items; track $index) {
+      <li class="sidenav-nav-item">
+        @if (!item.isLogout) {
+          <a
+            class="sidenav-nav-link"
+            [routerLink]="item.routeLink"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <mat-icon class="sidebar-link-icon" [class]="item.icon">{{
+              item.icon
+            }}</mat-icon>
+            @if (!isSidebarCollapsed()) {
+              <span class="sidenav-link-text">{{ item.label }}</span>
+            }
+          </a>
+        } @else {
+          <button class="sidenav-nav-link" (click)="logout()">
+            <mat-icon class="sidebar-link-icon" [class]="item.icon">{{
+              item.icon
+            }}</mat-icon>
+            @if (!isSidebarCollapsed()) {
+              <span class="sidenav-link-text">{{ item.label }}</span>
+            }
+          </button>
+        }
+      </li>
+    }
   </div>
 </div>

@@ -3,12 +3,7 @@
 @include mat.core();
 
 $tms-primary: mat.define-palette(mat.$orange-palette);
-$tms-accent: mat.define-palette(
-  mat.$blue-gray-palette,
-  700,
-  800,
-  900
-);
+$tms-accent: mat.define-palette(mat.$blue-gray-palette, 700, 800, 900);
 
 $tms-warn: mat.define-palette(mat.$red-palette);
 
@@ -25,10 +20,7 @@ $tms-theme: mat.define-light-theme(
 @include mat.all-component-themes($tms-theme);
 
 $primary: mat.get-color-from-palette($tms-primary, default);
-$primary-lighter: mat.get-color-from-palette(
-  $tms-primary,
-  lighter
-);
+$primary-lighter: mat.get-color-from-palette($tms-primary, lighter);
 $primary-darker: mat.get-color-from-palette($tms-primary, darker);
 
 $accent: mat.get-color-from-palette($tms-accent, A200);
@@ -55,6 +47,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f4f7fa;
 }
 
 .container {
@@ -78,7 +71,7 @@ body {
   padding: 16px;
   button {
     margin-right: 8px;
-    
+
     &:last-child {
       margin-right: 0;
     }
